@@ -1,5 +1,7 @@
-const { CohereClientV2 } = require('cohere-ai');
-require('dotenv').config();
+import { CohereClientV2 } from 'cohere-ai';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const cohere = new CohereClientV2({
   token: process.env.COHERE_API_KEY,
@@ -19,8 +21,8 @@ export default async function handler(req, res) {
           },
         ],
       });
-      
-      console.log('Cohere API response:',response.message.content[0]?.text);
+
+      console.log('Cohere API response:', response.message.content[0]?.text);
 
       res.status(200).json({ content: response.message.content[0]?.text || 'No response from Cohere API' });
     } catch (error) {
